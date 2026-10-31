@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Isha ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd1dc, #ff9aaf, #ee9ca7);
+    overflow: hidden;
+    color: #713b50;
+}
+
+/* ANIMATED 3D HEART BACKGROUND */
+
+#heart-background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    perspective: 800px;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -60px;
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg, #ff1744, #ff80ab);
+    transform: rotate(-45deg);
+    opacity: 0;
+    box-shadow: 0 0 15px rgba(255, 30, 100, 0.4);
+    animation: floatHeart linear infinite;
+}
+
+.floating-heart::before,
+.floating-heart::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.floating-heart::before {
+    top: -13px;
+    left: 0;
+}
+
+.floating-heart::after {
+    top: 0;
+    left: 13px;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(-45deg) rotateY(0deg) scale(0.6);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-50vh) rotate(-45deg) rotateY(180deg) scale(1);
+        opacity: 0.9;
+    }
+
+    90% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(-115vh) rotate(-45deg) rotateY(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* PAGES */
+
+.page {
+    display: none;
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 650px;
+    padding: 35px 25px;
+    text-align: center;
+    background: rgba(255,255,255,0.90);
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 25px;
+    box-shadow: 0 15px 45px rgba(120,40,70,0.25);
+    backdrop-filter: blur(12px);
+    animation: appear 0.7s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+h1 {
+    color: #d6336c;
+    font-size: clamp(25px, 6vw, 38px);
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* BUTTONS */
+
+button {
+    border: none;
+    border-radius: 30px;
+    padding: 13px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 5px 18px rgba(214,51,108,0.25);
+}
+
+.yes {
+    background: linear-gradient(135deg, #ff4d88, #ff1744);
+    color: white;
+}
+
+.no {
+    background: #777;
+    color: white;
+}
+
+.next {
+    background: linear-gradient(135deg, #d6336c, #ff4d88);
+    color: white;
+}
+
+.buttons {
+    position: relative;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+#noButton.running {
+    position: fixed;
+    z-index: 10;
+}
+
+/* HEART ICON ANIMATION */
+
+.heart {
+    font-size: 55px;
+    animation: heartbeat 1s infinite;
+    filter: drop-shadow(0 5px 8px rgba(255,50,100,0.3));
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* MESSAGE */
+
+.message {
+    text-align: left;
+    max-height: 55vh;
+    overflow-y: auto;
+    padding: 5px 12px;
+}
+
+.message p {
+    font-size: 17px;
+}
+
+.small {
+    font-size: 14px;
+    color: #9b6478;
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+    .page {
+        padding: 25px 16px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .message {
+        max-height: 48vh;
+    }
+
+    button {
+        padding: 12px 23px;
+        font-size: 16px;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING HEART BACKGROUND -->
+<div id="heart-background"></div>
+
+<!-- PAGE 1 -->
+<section class="page active" id="page1">
+
+    <div class="heart">💗</div>
+
+    <h1>Hey Isha! 🥹</h1>
+
+    <p>
+        I have something important to ask you...
+        <br><br>
+        Will you be my girlfriend? ❤️
+    </p>
+
+    <div class="buttons">
+        <button class="yes" onclick="firstYes()">YES 💖</button>
+        <button class="no" id="noButton">NO 🙃</button>
+    </div>
+
+    <p class="small">Choose wisely! 🌷</p>
+
+</section>
+
+<!-- PAGE 2 -->
+<section class="page" id="page2">
+
+    <div class="heart">🥹💕</div>
+
+    <h1>Nice to meet you my love!</h1>
+
+    <p>
+        WAITTT!! Did you actually say YES??
+        <br><br>
+        I think someone just made me the happiest person alive.
+        ❤️
+    </p>
+
+    <p class="small">Something special is coming...</p>
+
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="page3">
+
+    <div class="heart">🥺</div>
+
+    <h1>Well...</h1>
+
+    <p>
+        Looks like you wanna say no...
+        <br><br>
+        Maybe it's time I tell you why I really like you.
+    </p>
+
+</section>
+
+<!-- PAGE 4: HEARTFELT MESSAGE -->
+<section class="page" id="page4">
+
+    <div class="heart">💌</div>
+
+    <h1>Something from my heart, Isha</h1>
+
+    <div class="message">
+
+        <p>Dear Isha, ❤️</p>
+
+        <p>
+        I know I asked you this a week ago, and I understand
+        what you told me. I know you aren't interested in
+        dating right now and would rather wait until college.
+        </p>
+
+        <p>
+        I respect that, and I don't want you to think that
+        I'm trying to force you into something you're not ready for.
+        </p>
+
+        <p>
+        But there's something I really want you to know.
+        </p>
+
+        <p>
+        I genuinely like you, Isha. And it's not just because
+        I want a girlfriend. There's something about you that
+        makes me want to know you better, talk to you more,
+        and be a part of your life.
+        </p>
+
+        <p>
+        I know you've been hurt before, and maybe trusting
+        someone again isn't that easy. I don't know everything
+        you've been through, but I want you to know that you
+        deserve someone who respects you, understands you,
+        and genuinely cares about you.
+        </p>
+
+        <p>
+        I'm not going to tell you that I'll be perfect,
+        because I won't be. But I can tell you that my
+        intentions are genuine.
+        </p>
+
+        <p>
+        I'm not looking for something temporary. I want
+        something meaningful. I want to be there for you
+        on your good days and your bad days. I want to listen
+        to your random stories, laugh with you over the smallest
+        things, celebrate your achievements, and make beautiful
+        memories together.
+        </p>
+
+        <p>
+        I don't expect you to trust me immediately. I don't
+        expect you to forget your past. I'd rather earn your
+        trust slowly and show you through my actions that
+        I genuinely care.
+        </p>
+
+        <p>
+        And about what you said about dating in college...
+        I understand that too. I don't want you to change
+        your plans or your comfort just because I like you.
+        </p>
+
+        <p>
+        I just wish you could see me as someone worth getting
+        to know, even if it starts with a simple conversation
+        and a friendship.
+        </p>
+
+        <p>
+        Maybe something beautiful could come out of it someday.
+        And if it doesn't, I'll still be glad that I got
+        to know you.
+        </p>
+
+        <p>
+        I'm not asking you to make a decision because of
+        this message. I just wanted to be honest about
+        how I feel.
+        </p>
+
+        <p>
+        <b>
+        Isha, I really do like you. And if you ever feel
+        that you want to give us a chance, I'd be genuinely
+        happy to see where things go. ❤️
+        </b>
+        </p>
+
+        <p>
+        No pressure, no expectations. Just me being honest
+        with you.
+        </p>
+
+        <p>
+        With lots of affection,
+        <br>
+        Someone who genuinely likes you. ❤️
+        </p>
+
+    </div>
+
+    <button class="next" onclick="goToLastIntro()">NEXT 💗</button>
+
+</section>
+
+<!-- PAGE 5 -->
+<section class="page" id="page5">
+
+    <div class="heart">🌷</div>
+
+    <h1>Let's try it again, shall we?</h1>
+
+    <p>
+        No tricks this time.
+        <br><br>
+        Just one question from my heart. ❤️
+    </p>
+
+    <p class="small">Take your time, Isha.</p>
+
+</section>
+
+<!-- PAGE 6: FINAL QUESTION -->
+<section class="page" id="page6">
+
+    <div class="heart">💞</div>
+
+    <h1>Would you like to give us a chance? ❤️</h1>
+
+    <p>
+        No pressure, I promise.
+        <br>
+        I'd just love to see where things go.
+    </p>
+
+    <div class="buttons">
+
+        <button class="yes" onclick="finalYes()">YES ❤️</button>
+
+        <button class="no" onclick="finalNo()">NO 💔</button>
+
+    </div>
+
+</section>
+
+<!-- PAGE 7 -->
+<section class="page" id="page7">
+
+    <div class="heart">😭❤️</div>
+
+    <h1>YOU SAID YESSS!</h1>
+
+    <p>
+        Isha, you have no idea how happy you've made me!
+        <br><br>
+        Here's to new beginnings, silly conversations,
+        endless smiles, and beautiful memories.
+        <br><br>
+        Let's take things one step at a time and make
+        something beautiful together.
+        <br><br>
+        ❤️
+    </p>
+
+</section>
+
+<!-- PAGE 8 -->
+<section class="page" id="page8">
+
+    <div class="heart">🌸</div>
+
+    <h1>It's okay, Isha.</h1>
+
+    <p>
+        Thank you for being honest with me.
+        <br><br>
+        I respect your decision, and I genuinely wish you
+        happiness.
+        <br><br>
+        You deserve to be loved and respected, always. ❤️
+    </p>
+
+</section>
+
+<script>
+
+// GOOGLE SHEETS CONNECTION
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby5ZP0MzHU60wIzo_XmXZ7UM_Z01TkgegLvp1qP_ZgszN03wj5j77QvNRTR56mCSPQk7w/exec";
+
+function sendResponse(response) {
+
+    fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "response=" + encodeURIComponent(response)
+    }).catch(error => {
+        console.error("Response submission failed:", error);
+    });
+
+}
+
+
+// CREATE FLOATING 3D HEARTS
+
+const heartBackground = document.getElementById("heart-background");
+
+for (let i = 0; i < 25; i++) {
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    const size = Math.random() * 22 + 12;
+
+    heart.style.width = size + "px";
+    heart.style.height = size + "px";
+
+    heart.style.left = Math.random() * 100 + "%";
+
+    heart.style.animationDuration =
+        (Math.random() * 8 + 7) + "s";
+
+    heart.style.animationDelay =
+        (Math.random() * 12) + "s";
+
+    const colors = [
+        "linear-gradient(135deg, #ff1744, #ff80ab)",
+        "linear-gradient(135deg, #ff4081, #f8bbd0)",
+        "linear-gradient(135deg, #e91e63, #ff8a80)",
+        "linear-gradient(135deg, #ff5252, #ffb6c1)"
+    ];
+
+    heart.style.background =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    heart.style.boxShadow =
+        "0 0 18px rgba(255, 30, 100, 0.35)";
+
+    heartBackground.appendChild(heart);
+
+}
+
+
+// VARIABLES
+
+const noButton = document.getElementById("noButton");
+
+let noTimer = null;
+let transitionTimer = null;
+let sequenceStarted = false;
+
+
+// PAGE CHANGER
+
+function showPage(id) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+}
+
+
+// FIRST NO BUTTON: RUN AWAY
+
+function moveNoButton() {
+
+    if (!document.getElementById("page1").classList.contains("active")) {
+        return;
+    }
+
+    // Move button away from cursor
+
+    noButton.classList.add("running");
+
+    const padding = 20;
+
+    const maxX = window.innerWidth - noButton.offsetWidth - padding;
+    const maxY = window.innerHeight - noButton.offsetHeight - padding;
+
+    const x = Math.random() * Math.max(0, maxX - padding) + padding;
+    const y = Math.random() * Math.max(0, maxY - padding) + padding;
+
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
+
+
+    // Start countdown only once
+
+    if (!sequenceStarted) {
+
+        sequenceStarted = true;
+
+        noTimer = setTimeout(() => {
+
+            showPage("page3");
+
+            // After 3 seconds show the message
+
+            transitionTimer = setTimeout(() => {
+
+                showPage("page4");
+
+            }, 3000);
+
+        }, 4000);
+
+    }
+
+}
+
+
+// DESKTOP SUPPORT
+
+noButton.addEventListener("pointerenter", moveNoButton);
+
+
+// MOBILE SUPPORT
+
+noButton.addEventListener("touchstart", function(e) {
+
+    e.preventDefault();
+
+    moveNoButton();
+
+}, { passive: false });
+
+
+// FIRST YES BUTTON
+
+function firstYes() {
+
+    // Record the initial YES in Google Sheets
+    sendResponse("YES");
+
+    clearTimeout(noTimer);
+    clearTimeout(transitionTimer);
+
+    noTimer = null;
+    transitionTimer = null;
+
+    sequenceStarted = true;
+
+    showPage("page2");
+
+    setTimeout(() => {
+
+        showPage("page3");
+
+        setTimeout(() => {
+
+            showPage("page4");
+
+        }, 3000);
+
+    }, 5000);
+
+}
+
+
+// NEXT BUTTON
+
+function goToLastIntro() {
+
+    showPage("page5");
+
+    setTimeout(() => {
+
+        showPage("page6");
+
+    }, 2000);
+
+}
+
+
+// FINAL YES
+
+function finalYes() {
+
+    sendResponse("YES");
+
+    showPage("page7");
+
+}
+
+
+// FINAL NO
+
+function finalNo() {
+
+    sendResponse("NO");
+
+    showPage("page8");
+
+}
+
+</script>
+
+</body>
+</html>
